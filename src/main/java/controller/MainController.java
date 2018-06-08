@@ -1,13 +1,14 @@
 package controller;
 
+import model.Answer;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import view.Parser;
 
 import java.io.IOException;
+import java.util.List;
 
 @Controller
 public class MainController {
@@ -15,17 +16,19 @@ public class MainController {
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public ModelAndView main() {
         ModelAndView modelAndView = new ModelAndView();
-//        modelAndView.addObject("userJSP", new User());
         modelAndView.setViewName("index");
         return modelAndView;
     }
 
     @RequestMapping(value = "/query", method = RequestMethod.GET)
-    public ModelAndView main(@RequestAttribute String query) throws IOException {
-        ModelAndView modelAndView = new ModelAndView();
-        modelAndView.addObject("answers", Parser.getAnswers(query));
-        modelAndView.setViewName("index");
-        return modelAndView;
+    public String main(@RequestParam String query, Model model) throws IOException {
+        StringBuilder sb = new StringBuilder();
+
+        List<Answer> answers = Parser.getAnswers(query.replace(' ', '+'));
+        System.out.println(answers);
+        model.addAttribute("Title", "Query for stackoverflow");
+        model.addAttribute("answers", answers);
+        return "index";
     }
 
 }
