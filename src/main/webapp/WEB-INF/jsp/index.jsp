@@ -1,20 +1,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%--
-  Created by IntelliJ IDEA.
-  User: ruav
-  Date: 08.06.18
-  Time: 1:21
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
     <title>${Title}</title>
-    <%--<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Roboto:400,500,700,400italic|Material+Icons">--%>
 
-    <%--<script--%>
-            <%--src="https://storage.googleapis.com/code.getmdl.io/1.0.6/material.min.js">--%>
-    <%--</script>--%>
     <link rel="stylesheet" type="text/css" href="http://cdn.datatables.net/1.10.16/css/jquery.dataTables.css">
 
     <script type="text/javascript" charset="utf8" src="http://code.jquery.com/jquery-3.3.1.min.js"></script>
