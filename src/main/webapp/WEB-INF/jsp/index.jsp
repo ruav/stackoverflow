@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -22,6 +23,15 @@
         }
         .head {
             background-color: wheat;
+        }
+        A {
+            color: black; /* Цвет ссылок */
+        }
+        A:visited {
+            color: black;/* Цвет посещенных ссылок */
+        }
+        A:active {
+            color: black; /* Цвет активных ссылок */
         }
     </style>
     <script>
@@ -67,7 +77,6 @@
         <thead class="head">
         <td class="mdl-data-table__cell--non-numeric">Title</td>
         <td class="mdl-data-table__cell--non-numeric">Author</td>
-        <td class="mdl-data-table__cell--non-numeric">Link</td>
         <td class="mdl-data-table__cell--non-numeric">Date</td>
         <td class="mdl-data-table__cell--non-numeric">Answered</td>
         </thead>
@@ -77,10 +86,11 @@
                         style="background-color: mediumseagreen"
                 </c:if>
             >
-                <td class="mdl-data-table__cell--non-numeric">${answer.title}</td>
+                <td class="mdl-data-table__cell--non-numeric"><a href="${answer.url}">${answer.title}</a></td>
                 <td class="mdl-data-table__cell--non-numeric">${answer.author}</td>
-                <td class="mdl-data-table__cell--non-numeric">${answer.url}</td>
-                <td class="mdl-data-table__cell--non-numeric">${answer.date}</td>
+                <td class="mdl-data-table__cell--non-numeric">
+                    <fmt:formatDate value="${answer.date}" pattern="yyyy-MM-dd HH:mm:ss"/>
+                </td>
                 <td class="mdl-data-table__cell--non-numeric">${answer.answered}</td>
             </tr>
         </c:forEach>
