@@ -10,6 +10,8 @@ import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.util.EntityUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -20,7 +22,11 @@ public class Parser {
 
     private static String URL = "http://api.stackexchange.com/2.2/search?order=desc&sort=activity&intitle=%s&site=stackoverflow";
 
+    private static Logger LOGGER = LoggerFactory.getLogger(Parser.class);
+
     public static List<Answer> getAnswers(String query) throws IOException {
+
+        LOGGER.debug("Query: {}", query);
 
         if(query == null || query.isEmpty()) {
             return null;
@@ -29,6 +35,9 @@ public class Parser {
         HttpClient httpClient = HttpClientBuilder.create().build();
         HttpGet getRequest = new HttpGet(
                 String.format(URL, query));
+
+        LOGGER.debug("URL: {}", String.format(URL, query));
+
         getRequest.addHeader("accept", "application/json");
         HttpResponse response = httpClient.execute(getRequest);
 
@@ -53,7 +62,6 @@ public class Parser {
         }
 
         return answers;
-
 
     }
 
