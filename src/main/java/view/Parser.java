@@ -23,6 +23,7 @@ public class Parser {
     private static String URL = "http://api.stackexchange.com/2.2/search?order=desc&sort=activity&intitle=%s&site=stackoverflow";
 
     private static Logger LOGGER = LoggerFactory.getLogger(Parser.class);
+    private static HttpClient httpClient = HttpClientBuilder.create().build();
 
     public static List<Answer> getAnswers(String query) throws IOException {
 
@@ -32,7 +33,6 @@ public class Parser {
             return null;
         }
 
-        HttpClient httpClient = HttpClientBuilder.create().build();
         HttpGet getRequest = new HttpGet(
                 String.format(URL, query));
 
